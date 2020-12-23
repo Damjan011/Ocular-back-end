@@ -33,26 +33,26 @@ exports.findAll = (req, res) => {
   });
 };
 
-exports.findOne = (req, res) => {
-  Note.findById(req.params.noteId)
-  .then(note => {
-    if(!note) {
-      return res.status(404).send({
-        message: "Note with the id of " + req.params.noteId + " not found"
-      });
-    }
-    res.send(note);
-  }).catch(err => {
-    if(err.kind === 'ObjectId') {
-      return res.status(404).send({
-        message: "Note with the id of " + req.params.noteId + " not found"
-      });
-    }
-    return res.status(500).send({
-      message: "Error retrieving note with the id of " + req.params.noteId
-    });
-  });
-};
+// exports.findOne = (req, res) => {
+//   Note.findById(req.params.noteId)
+//   .then(note => {
+//     if(!note) {
+//       return res.status(404).send({
+//         message: "Note with the id of " + req.params.noteId + " not found"
+//       });
+//     }
+//     res.send(note);
+//   }).catch(err => {
+//     if(err.kind === 'ObjectId') {
+//       return res.status(404).send({
+//         message: "Note with the id of " + req.params.noteId + " not found"
+//       });
+//     }
+//     return res.status(500).send({
+//       message: "Error retrieving note with the id of " + req.params.noteId
+//     });
+//   });
+// };
 
 exports.update = (req, res) => {
   if(!req.body.content) {
@@ -83,8 +83,6 @@ exports.update = (req, res) => {
     })
   })
 };
-
-// Delete
 
 exports.delete = (req, res) => {
   Note.findByIdAndRemove(req.params.noteId)
